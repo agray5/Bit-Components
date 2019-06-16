@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
-import { Link } from '@reach/router';
+import { Link as RLink} from '@reach/router';
 import isExternal from 'is-url-external';
 import PropTypes from 'prop-types'
-
-const propTypes = {
-  to: PropTypes.string.isRequired,
-};
 
 const useHref = (link) => {
   return isExternal(link) || /mailto:.*/.test(link);
 }
 
 /**
- * Link that also works for external URL's
+ * Wrapper Component for @reach/router
+ * Link that works for external URLs and mailto URLs.
+ * 
  */
-export default class LinkDuo extends Component {
+class Link extends Component {
+  static propTypes = {
+    to: PropTypes.string.isRequired,
+    /** If true, external link will not open in new tab. */
+    notab: PropTypes.bool
+  };
   render() {
     return useHref(this.props.to) ?
       <a
@@ -23,8 +26,8 @@ export default class LinkDuo extends Component {
         target={!this.props.notab && "_blank"}
       />
       :
-      <Link {...this.props} />;
+      <RLink {...this.props} />;
   }
 }
 
-LinkDuo.propTypes = propTypes;
+export default Link

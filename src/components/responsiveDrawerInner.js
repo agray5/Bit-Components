@@ -2,17 +2,23 @@ import React from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Drawer from '@material-ui/core/Drawer';
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
-const drawerWidth = 240;
 
+const getAccent = (theme) => {
+  return theme.palette.accent?theme.palette.accent.main:"initial"
+}
 
+/** Style Wrapper for Responsive Drawer. Provides styles for open, closed, 
+ * and mini state. Also listens for mouse leave drawer.
+ */
 const StyledDrawer = styled(Drawer)`
 && {
   & .nav-link:hover,.Mui-selected {
-      color: ${props => props.theme.palette.accent.main};
+      color: ${props => getAccent(props.theme)};
 
       & svg {
-        color: ${props => props.theme.palette.accent.main};
+        color: ${props => getAccent(props.theme)};
       }
     }
 
@@ -34,8 +40,8 @@ const StyledDrawer = styled(Drawer)`
 
 
   &.open > div {
-    width: ${drawerWidth}px;
-    transition: ${props.theme.transitions.create('width', {
+    width: ${props => props.width}px;
+    transition: ${props => props.theme.transitions.create('width', {
                   easing: props.theme.transitions.easing.easeIn,
                   duration: props.theme.transitions.duration.standard,
                 })}
@@ -47,8 +53,8 @@ const StyledDrawer = styled(Drawer)`
     overflow-x: hidden;
     width: ${props => props.theme.spacing(7) + 1}px;
     transition: ${props => props.theme.transitions.create('width', {
-                  easing: theme.transitions.easing.easeOut,
-                  duration: theme.transitions.duration.standard,
+                  easing: props.theme.transitions.easing.easeOut,
+                  duration: props.theme.transitions.duration.standard,
                 })};
         
     ${props => [props.theme.breakpoints.up('sm')]} {
@@ -56,17 +62,9 @@ const StyledDrawer = styled(Drawer)`
     }
   }
 }
-/*
-    <List>
-          {icons.map((icon, index) => (
-            <ListItem button key={index}>
-              <ListItemIcon><Icon icon={icon} size={24}/></ListItemIcon>
-            </ListItem>
-          ))}
-          </List>*/
 `
+
 function withListener (WrappedComponent) { 
-  console.log("comp", WrappedComponent)
   return (props) => (
     <>
     {
@@ -79,6 +77,21 @@ function withListener (WrappedComponent) {
   )
 }
 
+const WrappedComponent = withListener(StyledDrawer);
 
-export default withListener(StyledDrawer);
+WrappedComponent.propTypes = {
+  theme: PropTypes.object.isRequired,
+  /** Drawer width in pixels */
+  width: PropTypes.number,
+  /** Is called  when mouse leaves drawer. */
+  onClose: PropTypes.func.isRequired
+}
+
+WrappedComponent.defaultProps = {
+  width: 240
+}
+
+
+
+export default WrappedComponent;
 

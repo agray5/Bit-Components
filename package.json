@@ -4,8 +4,36 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "April Gray <aprgray5@gmail.com> (https://agray5.com)",
-  "license": "MIT"
+  "license": "MIT",
+  "bit": {
+    "env": {
+      "compiler": "bit.envs/compilers/react@1.0.2"
+    },
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.1.1",
+    "@material-ui/icons": "^4.2.0",
+    "@reach/router": "^1.2.1",
+    "is-url-external": "^1.0.3",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-device-detect": "^1.6.2",
+    "react-icons-kit": "^1.3.1",
+    "styled-components": "^4.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@storybook/addon-actions": "^5.1.8",
+    "@storybook/addon-links": "^5.1.8",
+    "@storybook/addons": "^5.1.8",
+    "@storybook/react": "^5.1.8",
+    "babel-loader": "^8.0.6"
+  }
 }
