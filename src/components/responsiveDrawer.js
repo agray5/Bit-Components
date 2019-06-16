@@ -77,6 +77,7 @@ class Header extends Component{
                     className={this.state.mode}
                     variant="permanent"
                     withClickAway={this.state.mode === modes.open}
+                    theme={this.props.theme}
                 >
                     { this.props.links && this.props.links.map((linkList, index) => (
                         <>
