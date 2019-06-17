@@ -2,6 +2,7 @@ import React from 'react'
 import DrawerInner from "../src/components/responsiveDrawerInner"
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import Drawer from '../src/components/responsiveDrawer'
+import {home} from 'react-icons-kit/fa/home'
 
 const theme = createMuiTheme({
   palette:{
@@ -10,7 +11,7 @@ const theme = createMuiTheme({
 });
 
 const links = [[
-  {name: "Hello", url: "/"}
+  {name: "Hello", url: "/", icon: home}
 ]]
 
 export default () => (

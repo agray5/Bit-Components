@@ -18,7 +18,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n&& {\n  & .nav-link:hover,.Mui-selected {\n      color: ", ";\n\n      & svg {\n        color: ", ";\n      }\n    }\n\n  & > div {\n    background-color: ", ";\n\n    & svg {\n      color: ", ";\n    }\n  }\n\n  &.closed > div {\n    width: 0;\n    transition: ", "\n  }\n\n\n  &.open > div {\n    width: ", "px;\n    transition: ", "\n  }\n\n\n\n  &.mini > div{\n    overflow-x: hidden;\n    width: ", "px;\n    transition: ", ";\n        \n    ", " {\n      width: ", "px;\n    }\n  }\n}\n"]);
+  var data = _taggedTemplateLiteral(["\n&& {\n  & .nav-link:hover,.Mui-selected {\n      color: ", ";\n\n      & svg {\n        color: ", ";\n      }\n    }\n\n  & > div {\n    background-color: ", ";\n    color: ", ";\n\n    & svg {\n      color: ", ";\n    }\n  }\n\n  &.closed > div {\n    width: 0;\n    transition: ", "\n  }\n\n\n  &.open > div {\n    width: ", "px;\n    transition: ", "\n  }\n\n\n\n  &.mini > div{\n    overflow-x: hidden;\n    width: ", "px;\n    transition: ", ";\n        \n    ", " {\n      width: ", "px;\n    }\n  }\n}\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -29,15 +29,22 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
+var getAccent = function getAccent(theme) {
+  return theme.palette.accent ? theme.palette.accent.main : "initial";
+};
 /** Style Wrapper for Responsive Drawer. Provides styles for open, closed, 
- * and mini state. Also listens 
+ * and mini state. Also listens for mouse leave drawer.
  */
+
+
 var StyledDrawer = (0, _styledComponents["default"])(_Drawer["default"])(_templateObject(), function (props) {
-  return props.theme.palette.accent.main;
+  return getAccent(props.theme);
 }, function (props) {
-  return props.theme.palette.accent.main;
+  return getAccent(props.theme);
 }, function (props) {
   return props.theme.palette.secondary.main;
+}, function (props) {
+  return props.theme.palette.primary.main;
 }, function (props) {
   return props.theme.palette.primary.main;
 }, function (props) {
@@ -56,8 +63,8 @@ var StyledDrawer = (0, _styledComponents["default"])(_Drawer["default"])(_templa
   return props.theme.spacing(7) + 1;
 }, function (props) {
   return props.theme.transitions.create('width', {
-    easing: theme.transitions.easing.easeOut,
-    duration: theme.transitions.duration.standard
+    easing: props.theme.transitions.easing.easeOut,
+    duration: props.theme.transitions.duration.standard
   });
 }, function (props) {
   return [props.theme.breakpoints.up('sm')];
